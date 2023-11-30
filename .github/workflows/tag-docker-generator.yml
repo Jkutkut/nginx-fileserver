@@ -49,7 +49,7 @@ jobs:
 
   dockerhub-update:
     needs: tag-release
-    if: contains(github.event.pull_request.labels.*.name, 'mayor update')
+    if: contains(github.event.pull_request.labels.*.name, 'minor update') == false
     runs-on: ubuntu-latest
     name: Push Docker image to Docker Hub
     steps:
