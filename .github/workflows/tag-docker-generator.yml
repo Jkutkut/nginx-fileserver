@@ -25,7 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          current_tag=$(git describe --tags $(git rev-list --tags --max-count=1) | echo '0.0.0')
+          current_tag=$(git describe --tags $(git rev-list --tags --max-count=1) || echo '0.0.0')
           echo "Current tag: $current_tag"
           echo "Mayor update"
           new_tag=$(echo "$current_tag" | awk -F. -v OFS=. '{print $1,$2+1,0}')
@@ -39,7 +39,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          current_tag=$(git describe --tags $(git rev-list --tags --max-count=1) | echo '0.0.0')
+          current_tag=$(git describe --tags $(git rev-list --tags --max-count=1) || echo '0.0.0')
           echo "Current tag: $current_tag"
           echo "Minor update"
           new_tag=$(echo "$current_tag" | awk -F. '{$NF = $NF + 1;} 1' OFS=.)
